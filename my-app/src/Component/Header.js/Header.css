@@ -1,0 +1,22 @@
+.logo 
+{
+    text-align: center;
+
+}
+.sub{
+    text-align: center;
+    background-color: black;
+
+}
+.logo img{
+    margin-top: 30px;
+}
+.sub ul li{
+    display: inline-flex; 
+   
+}
+.sub ul li a{
+    text-decoration: none;
+    padding: 20px;
+    
+}
