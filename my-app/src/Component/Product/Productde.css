@@ -1,0 +1,19 @@
+.Product-itemview{
+    display: flex;
+    border-bottom: 1px solid rgb(233, 226, 226);
+    padding-bottom: 5px;
+}
+.imge-view{
+
+    padding-right: 3px;
+}
+.describ-view{
+    margin-left: 40px;
+}
+.btn-buy{
+
+  background-color: rgb(231, 217, 19);
+}
+.describ-view a {
+    text-decoration: none;
+}

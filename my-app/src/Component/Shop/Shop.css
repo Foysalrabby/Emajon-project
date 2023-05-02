@@ -1,0 +1,14 @@
+.shopviews {
+    display: flex; 
+ 
+}
+.product-itemview
+{
+ width: 50%;
+ border-right: 1px solid rgb(230, 216, 216);
+ margin-left: 70px;
+}
+
+.price-itemview p{
+margin-left: 40px;
+}
