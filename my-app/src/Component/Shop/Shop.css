@@ -12,3 +12,7 @@
 .price-itemview p{
 margin-left: 40px;
 }
+.price-itemview h5,h3{
+    margin-left: 5px;
+  
+  }

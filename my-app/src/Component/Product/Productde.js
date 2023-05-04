@@ -15,7 +15,7 @@ const Productde = (props) => {
             <p>by: {seller}</p>
             <h5>Price {price}</h5>
            
-            <button className="btn-buy">Buy</button>
+            <button onClick={()=>props.handlecart(props.productdata)} className="btn-buy">Buy</button>
         </div>
           
         </div>
