@@ -1,5 +1,6 @@
 import React from 'react';
 import './Productde.css';
+import { BsFillCartFill } from "react-icons/bs";
 
 const Productde = (props) => {
    // console.log(props.product.price)
@@ -15,7 +16,7 @@ const Productde = (props) => {
             <p>by: {seller}</p>
             <h5>Price {price}</h5>
            
-            <button onClick={()=>props.handlecart(props.productdata)} className="btn-buy">Buy</button>
+            <button onClick={()=>props.handlecart(props.productdata)} className="btn-buy"><BsFillCartFill/>Buy</button>
         </div>
           
         </div>
