@@ -1,6 +1,7 @@
 import React from 'react';
 import alogo from '../../images/logo.png';
 import './Header.css';
+import { Router } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -11,10 +12,12 @@ const Header = () => {
            </div> 
            <div className="sub">
            <ul>
-            
-                <li><a href="">Shop </a></li>
-                <li><a href=""> Order Review</a></li>
-                <li><a href="">Manage Inventory</a></li>
+           
+            <li><a href="/">Shop </a></li>
+                <li><a href="/review"> Order Review</a></li>
+                <li><a href="/inventory">Manage Inventory</a></li>
+          
+                
                 
                
            
