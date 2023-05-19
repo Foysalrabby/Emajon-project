@@ -13,13 +13,11 @@ const Header = () => {
            <div className="sub">
            <ul>
            
-            <li><a href="/">Shop </a></li>
+                <li><a href="/">Shop </a></li>
                 <li><a href="/review"> Order Review</a></li>
                 <li><a href="/inventory">Manage Inventory</a></li>
           
-                
-                
-               
+ 
            
            </ul>
            </div>

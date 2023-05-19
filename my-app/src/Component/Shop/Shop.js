@@ -15,8 +15,8 @@ const Shop = () => {
  console.log("clicked",product);
  const newcart=[...cart,product];
  setcart(newcart);
- const sameproduct=newcart.filter(pd =>pd.id === product.id);
- const count=sameproduct.length;   
+  const sameproduct= newcart.filter(pd =>pd.id === product.id);
+  const count=sameproduct.length;   
  addToDb(product.id,count);
  
  }
@@ -26,7 +26,7 @@ const Shop = () => {
             <div className="product-itemview">
              {
                 products.map( pd => <Productde 
-                key={pd.id}
+                key ={pd.id}
                  productdata={pd}
                  handlecart={handlecart}
                   >
