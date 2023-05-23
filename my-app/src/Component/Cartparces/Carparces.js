@@ -6,7 +6,7 @@ const Carparces = (props) => {
     let totalprice = 0;
   for(let i=0 ; i < cartdata.length;i++){
    const productprice=cartdata[i];
-    totalprice=totalprice+productprice.price;
+    totalprice=totalprice+(productprice.price)*productprice.quantity;
 
   }
   //use reduce same work to  for loop  for price
