@@ -35,7 +35,7 @@ const Carparces = (props) => {
             <p>Tax :{tax}</p>
             <p>Total price :{finalcost}</p>  
             <Link to="/review">
-            <button className="btn-buy">Review</button>  
+            <button  className="btn-buy">Review</button>  
             </Link>
                    
         </div>
