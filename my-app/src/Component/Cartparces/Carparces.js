@@ -1,12 +1,13 @@
 import React from 'react';
 import './Cartparces.css';
-import { Link } from 'react-router-dom';
+
 const Carparces = (props) => {
     const cartdata=props.cartdata;
     let totalprice = 0;
   for(let i=0 ; i < cartdata.length;i++){
    const productprice=cartdata[i];
     totalprice=totalprice+(productprice.price)*productprice.quantity;
+    debugger;
 
   }
   //use reduce same work to  for loop  for price
@@ -34,10 +35,10 @@ const Carparces = (props) => {
             <p>Shiping :{shiping}</p>
             <p>Tax :{tax}</p>
             <p>Total price :{finalcost}</p>  
-            <Link to="/review">
-            <button  className="btn-buy">Review</button>  
-            </Link>
-                   
+          
+              {
+                props.children
+              }     
         </div>
     );
 };

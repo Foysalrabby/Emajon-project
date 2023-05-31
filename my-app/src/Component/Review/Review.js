@@ -5,9 +5,21 @@ import { getShoppingCart } from '../../utilities/fakedb';
 import Itemreview from '../Itemreview/Itemreview';
 import './Review.css';
 import Carparces from '../Cartparces/Carparces';
+import happyimage from '../../images/giphy.gif';
+import { deleteShoppingCart } from '../../utilities/fakedb';
 
 const Review = () => {
    const [cart1,setcart1]=useState([]);
+   const [placeholder,setplaceholder]= useState(false);
+   const handlepalceholder=()=>{
+    setcart1([]);
+    setplaceholder(true);
+    deleteShoppingCart();
+   }
+   let thankyou;
+ if(placeholder){
+  thankyou= <img src={happyimage} alt="H"  />
+ }
 
    const haldleremove=(productskey)=>{
     console.log("clicked",productskey);
@@ -45,10 +57,15 @@ useEffect(()=>{
           >
 
           </Itemreview>)
+
+          
         }
+        {thankyou}
         </div>
         <div className="itemsection2">
-          <Carparces cartdata={cart1}></Carparces>
+          <Carparces cartdata={cart1}>
+            <button onClick={handlepalceholder}>Place order</button>
+          </Carparces>
         </div>
        
         
