@@ -4,7 +4,7 @@ import { BsFillCartFill } from "react-icons/bs";
 
 const Productde = (props) => {
    // console.log(props.product.price)
-   const {name,img,price,seller,} = props.productdata;
+   const {name,img,price,seller} = props.productdata;
     return (
         <div className="Product-itemview">
         <div className="imge-view">

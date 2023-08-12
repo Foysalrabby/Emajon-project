@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
+import {  useNavigate  } from "react-router-dom";
 import fakeData from '../../fakeData/products.json';
 import { addToDb, removeFromDb } from '../../utilities/fakedb';
 import { getShoppingCart } from '../../utilities/fakedb';
@@ -11,10 +12,12 @@ import { deleteShoppingCart } from '../../utilities/fakedb';
 const Review = () => {
    const [cart1,setcart1]=useState([]);
    const [placeholder,setplaceholder]= useState(false);
+   const navigate = useNavigate();
    const handlepalceholder=()=>{
-    setcart1([]);
-    setplaceholder(true);
-    deleteShoppingCart();
+    // setcart1([]);
+    // setplaceholder(true);
+    // deleteShoppingCart();
+    navigate("/shipment");
    }
    let thankyou;
  if(placeholder){
@@ -64,7 +67,7 @@ useEffect(()=>{
         </div>
         <div className="itemsection2">
           <Carparces cartdata={cart1}>
-            <button onClick={handlepalceholder}>Place order</button>
+            <button onClick={handlepalceholder}>Proceed checkout</button>
           </Carparces>
         </div>
        

@@ -57,7 +57,7 @@ const Shop = () => {
     return (
         <div className="shopviews">
             <div className="product-itemview">
-             {
+             { 
                 products.map( pd => <Productde 
                 key ={pd.id}
                  productdata={pd}
