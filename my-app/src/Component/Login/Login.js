@@ -1,5 +1,5 @@
 
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 
 import firebase, {initializeApp} from './firebase';
 import { getAuth} from 'firebase/auth';
@@ -9,12 +9,11 @@ import {  signInWithEmailAndPassword } from "firebase/auth";
 import {  updateProfile } from "firebase/auth";
 import {  signOut } from "firebase/auth";
 import { FacebookAuthProvider } from "firebase/auth";
+import { userLoginconstext } from '../../App';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const provider1 = new FacebookAuthProvider();
 const provider = new GoogleAuthProvider();
-
-
-
 
 
 function Login() {
@@ -27,6 +26,10 @@ function Login() {
     photo:""
 
   });
+
+  const [loginuser,setloginuser]=useContext(userLoginconstext);
+  const navigate=useNavigate();
+  const location=useLocation();
   const handleuser=()=>{
 
     const auth = getAuth();
@@ -120,6 +123,11 @@ function Login() {
           newuserDISmess.success=true;
           newuserDISmess.error='';
           setinfo(newuserDISmess);
+          setloginuser(newuserDISmess);
+          if(location.state?.form){
+            navigate(location.state.form);
+
+          }
           console.log("when sign up user name and details",res.user);
         })
         .catch((error) => {

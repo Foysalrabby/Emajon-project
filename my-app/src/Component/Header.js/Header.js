@@ -1,7 +1,7 @@
 import React from 'react';
 import alogo from '../../images/logo.png';
 import './Header.css';
-import { Router } from 'react-router-dom';
+import {Link, Router } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -13,9 +13,13 @@ const Header = () => {
            <div className="sub">
            <ul>
            
-                <li><a href="/">Shop </a></li>
-                <li><a href="/review"> Order Review</a></li>
-                <li><a href="/inventory">Manage Inventory</a></li>
+               <li><Link className='customlink' to ="/">Shop </Link></li>
+               <li><Link className='customlink' to ="/review"> Order Review</Link></li>
+               <li><Link className='customlink' to ="inventory">Manage Inventory</Link></li>
+               
+                
+                
+                
           
  
            
