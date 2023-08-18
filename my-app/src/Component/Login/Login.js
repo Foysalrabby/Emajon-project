@@ -3,17 +3,11 @@ import {useContext, useState} from 'react';
 
 import firebase, {initializeApp} from './firebase';
 import { getAuth} from 'firebase/auth';
-import {  createUserWithEmailAndPassword } from "firebase/auth";
-import { signInWithPopup , GoogleAuthProvider} from "firebase/auth";
-import {  signInWithEmailAndPassword } from "firebase/auth";
-import {  updateProfile } from "firebase/auth";
-import {  signOut } from "firebase/auth";
-import { FacebookAuthProvider } from "firebase/auth";
 import { userLoginconstext } from '../../App';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createnewEmailandPass, handleGoogleuser, handlefacbook, handlesignout, signupwithEmailandpass } from './Loginmanager';
 
-const provider1 = new FacebookAuthProvider();
-const provider = new GoogleAuthProvider();
+
 
 
 function Login() {
@@ -30,114 +24,76 @@ function Login() {
   const [loginuser,setloginuser]=useContext(userLoginconstext);
   const navigate=useNavigate();
   const location=useLocation();
-  const handleuser=()=>{
-
-    const auth = getAuth();
-    signInWithPopup(auth,provider)
-    .then(res =>{
-      const {displayName,email,photoUrl}=res.user;
-      const userdata = {
-           isSigned:true,
-           name : displayName,
-           email : email,
-           photo :photoUrl
-
-
-      }
-      setinfo(userdata);
-      
-      console.log(displayName,email,photoUrl);
-    }).catch(error =>{
-      console.log(error.message);
-    })
-  
-  };
-
-  const handlesignout=()=>{
-
-    const auth = getAuth();
-    signOut(auth)
-    .then(res => {
-      const sinoutuser={
-       isSigned:false,
-       name:'',
-       email:'',
-       password:'',
-       photo:'',
-       error:'',
-       success:''
-       
-        
-      }
-   setinfo(sinoutuser);
-   console.log(res);
-
-    }).catch(error=>{
-      console.log(error);
+  //google user sign in
+  const GoogleusersingnIn=()=>{
+    handleGoogleuser()
+    .then(res=>{
+     setinfo(res);
+     setloginuser(res);
+     if(location.state?.form){
+       navigate(location.state.form);
+          }
 
     });
-      
-    console.log("clicked");
 
   }
+//facebook signup
+const facbooksignup=()=>{
+ handlefacbook()
+ .then(res=>{
+  setinfo(res);
+   setloginuser(res);
+  if(location.state?.form){
+    navigate(location.state.form);
+       }
+
+ });
+
+}
+
+//signout
+const signout=()=>{
+  handlesignout()
+  .then(res =>{
+    setinfo(res);
+    setloginuser(res);
+
+  });
+
+
+
+}
+  
   //----------------handlesubmit to take password and gmail to sign in
 
   const handlesubmit = (e) => {
 
     if(singupuser && userinfo.email && userinfo.password){
      
-
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth,userinfo.email, userinfo.password)
-        .then((res) => {
-
-          const newuserDISmess={...userinfo};
-          newuserDISmess.success=true;
-          newuserDISmess.error='';
-          setinfo(newuserDISmess);
-          usernameOtherinfo(newuserDISmess.name);
-          // Signed in 
-         // const user = userCredential.user;
-          //console.log(user);
-
-          // ...
-        })
-        .catch((error) => {
-          const newuserDISmess={...userinfo};
-          newuserDISmess.success=false;
-          newuserDISmess.error=error.message;
-          //const errorCode = error.code;
-          //onst errorMessage = error.message;
-          //console.log(errorMessage);
-          setinfo(newuserDISmess);
-          // ..
-        });
+      createnewEmailandPass(userinfo.name,userinfo.email,userinfo.password)
+      .then(res=>{
+        setinfo(res);
+        setloginuser(res);
+        if(location.state?.form){
+          navigate(location.state.form);
+             }
+      
+       });
+   
     }
     if(!singupuser && userinfo.email && userinfo.password){
       
+      signupwithEmailandpass(userinfo.email,userinfo.password)
+      .then(res=>{
+        setinfo(res);
+        setloginuser(res);
+        if(location.state?.form){
+          navigate(location.state.form);
+             }
+      
+       });
 
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth,userinfo.email, userinfo.password)
-        .then((res) => {
-          const newuserDISmess={...userinfo};
-          newuserDISmess.success=true;
-          newuserDISmess.error='';
-          setinfo(newuserDISmess);
-          setloginuser(newuserDISmess);
-          if(location.state?.form){
-            navigate(location.state.form);
-
-          }
-          console.log("when sign up user name and details",res.user);
-        })
-        .catch((error) => {
-          const newuserDISmess={...userinfo};
-          newuserDISmess.success=true;
-          newuserDISmess.error=error.message;
-          setinfo(newuserDISmess);
-          //const errorCode = error.code;
-          //const errorMessage = error.message;
-        });
+   
 
     }
    e.preventDefault(); //jate automatic vabe submit hoy na
@@ -170,59 +126,18 @@ const handlechange = (e) => {
      }
 
 }
-//to takeusername and dispaly
-const usernameOtherinfo = namex =>{
-const auth = getAuth();
-updateProfile(auth.currentUser, {
-    displayName:namex
-   
-  }).then(() => {
-    console.log("Update the name successfully");
-  }).catch((error) => {
-    console.log(error);
-  });
 
-}
-//handle facebbok
-const handlefacbook=()=>{
 
-const auth = getAuth();
-signInWithPopup(auth, provider1)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-    console.log(user);
-
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
-
-    // ...
-  });
-
-}
 
   return (
     <div style={{textAlign:'center'}}>
     {
-     userinfo.isSigned ?<button onClick={handlesignout}>singnout</button>:
-     <button onClick={handleuser}>Sign in</button> //like if (userinfo.isSigned == true)
+     userinfo.isSigned ?<button onClick={signout}>singnout</button>:
+     <button onClick={GoogleusersingnIn}>Sign in</button> //like if (userinfo.isSigned == true)
      //<button onClick={handlesignout}>singnout</button>:
     }
    {
-    <button onClick={handlefacbook}>sing in facebbok</button>
+    <button onClick={facbooksignup}>sing in facebbok</button>
    }
      
      {
